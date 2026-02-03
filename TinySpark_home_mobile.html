@@ -45,6 +45,33 @@
           <span class="speech-tail" aria-hidden="true"></span>
         </div>
         <img class="pet" src="images/pet_rock.png" alt="">
+        <script>
+          (() => {
+            const pet = document.querySelector('.pet');
+            if (!pet) return;
+        
+            const amplitude = 5;
+            const period = 1800;
+        
+            const baseTransform =
+              getComputedStyle(pet).transform === 'none'
+                ? ''
+                : getComputedStyle(pet).transform;
+        
+            const start = performance.now();
+        
+            function tick(now){
+              const t = (now - start) / period * (Math.PI * 2);
+              const y = Math.sin(t) * amplitude;
+        
+              pet.style.transform = `${baseTransform} translateY(${y}px)`;
+        
+              requestAnimationFrame(tick);
+            }
+        
+            requestAnimationFrame(tick);
+          })();
+        </script>
       </section>
     </main>
 
